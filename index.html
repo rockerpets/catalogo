@@ -326,8 +326,19 @@ td.hide-col { display:none; }
   cursor:pointer; white-space:nowrap; transition:background 0.15s;
 }
 .btn-ver:hover { background:var(--sage-mid); color:#fff; }
+.card-botones {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;
+}
+.btn-pedir {
+  display:inline-block; background:var(--sage-light); color:var(--sage-dark);
+  border:none; border-radius:6px; padding:3px 9px;
+  font-family:'Nunito',sans-serif; font-size:11px; font-weight:700;
+  cursor:pointer; white-space:nowrap; transition:background 0.15s;
+  text-decoration:none;
+}
+.btn-pedir:hover { background:var(--sage-mid); color:#fff; }
 .card-ver {
-  display:block; width:100%; margin-top:10px;
+  display:block; width:100%; margin-top:10px; text-align:center; text-decoration:none;
   background:#faf5ff; color:#7e22ce;
   border:1px solid #d8b4fe; border-radius:8px; padding:8px;
   font-family:'Nunito',sans-serif; font-size:13px; font-weight:700;
@@ -619,7 +630,13 @@ function filtrar() {
       ${tdThumb}
       <td><div class="td-nombre"><span class="cat-dot" style="background:${col}"></span>${p.producto}</div>
           <div class="td-meta">${p.marca} · <span style="font-size:10px;color:#bbb">${p.cat}</span></div></td>
-      <td><span class="td-pres">${p.presentacion}</span><br><button class="btn-ver" onclick="openModal(${idx})">Ver más</button></td>
+      <td>
+        <span class="td-pres">${p.presentacion}</span><br>
+        <div style="display:flex;gap:5px;margin-top:4px;">
+          <button class="btn-ver" onclick="openModal(${idx})">Ver más</button>
+          <a class="btn-ver" href="https://wa.me/528184678112?text=${encodeURIComponent('Hola, quiero pedir: ' + p.producto + ' ' + p.presentacion + ' (' + p.marca + ')')}" target="_blank" style="text-decoration:none;text-align:center;display:inline-block;">💬 Pedir</a>
+        </div>
+      </td>
       ${etCell}${rzCell}
       <td class="price-cell">${reg}<span class="price-efvo">${fmt(p.efvo)}</span><span class="price-label">Efvo / Transfer</span></td>
       <td class="price-cell">${reg}<span class="price-tarjeta">${fmt(p.tarjeta)}</span><span class="price-label">Tarjeta</span></td>
@@ -660,7 +677,10 @@ function filtrar() {
           <div class="card-lbl">💳 Tarjeta</div>
         </div>
       </div>
-      <button class="card-ver" onclick="openModal(${idx})">Ver más +</button>
+      <div class="card-botones">
+        <button class="card-ver" onclick="openModal(${idx})">Ver más +</button>
+        <a class="card-ver" href="https://wa.me/528184678112?text=${encodeURIComponent('Hola, quiero pedir: ' + p.producto + ' ' + p.presentacion + ' (' + p.marca + ')')}" target="_blank">💬 Pedir</a>
+      </div>
     </div>`;
   }).join('');
 }
